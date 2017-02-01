@@ -34,7 +34,7 @@ export class HomePage {
   }
 
   doInfinite(infiniteSroll) {
-    if(!this.feeds) {
+    if(!this.feeds || !this.nextPageToken) {
       infiniteSroll.complete();
       return;
     }

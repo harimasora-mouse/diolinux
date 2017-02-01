@@ -1,18 +1,49 @@
-<!--
-  Generated template for the Diocast page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Diocast</ion-title>
+  <ion-navbar color="white">
+    <ion-title>
+      <img width="34" height="32" src="assets/logo.png"/>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <!--PULL TO REFRESH-->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Carregar novos posts"
+      refreshingSpinner="circles"
+      refreshingText="Carregando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!--LOADING BOX-->
+  <div class="spinner-box" *ngIf="!feeds">
+    <ion-spinner></ion-spinner>
+    <p class="info">Carregando...</p>
+  </div>
+
+  <!--FEED-->
+  <ion-card *ngFor="let feed of feeds">
+    <ion-card-content>
+      <p class="card-date">{{feed.published | date:'fullDate' | capitalize}}</p>
+      <h2 class="card-title" (click)="itemSelected(feed.content)" tappable="true">{{feed.title}}</h2>
+      <img class="card-image" [src]="feed.imageUrl" (click)="itemSelected(feed.content)" tappable="true"/>
+      <read-more class="card-description" [text]="feed.content" [maxLength]="250" (click)="itemSelected(feed.content)" tappable="true"></read-more>
+    </ion-card-content>
+  </ion-card>
+
+  <!--INFINITE SCROLL-->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingText="Carregando mais posts...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

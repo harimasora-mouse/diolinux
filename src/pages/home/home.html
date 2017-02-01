@@ -60,6 +60,8 @@
       <read-more class="card-description" [text]="feed.content" [maxLength]="250" (click)="itemSelected(feed.content)" tappable="true"></read-more>
     </ion-card-content>
   </ion-card>
+
+  <!--INFINITE SCROLL-->
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
       loadingText="Carregando mais posts...">

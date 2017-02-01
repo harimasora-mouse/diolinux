@@ -49,7 +49,7 @@ export class BloggerService {
   fetchOlderPosts(url:string, nextPageToken: string, labels: string): Promise<any> {
       return new Promise(resolve => {
           let params = new URLSearchParams();
-          if(nextPageToken.length > 0) {
+          if(nextPageToken && nextPageToken.length > 0) {
               params.set('pageToken', nextPageToken);
           }
           if(labels.length > 0) {
