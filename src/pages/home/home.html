@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar color="white">
+    <ion-title>
+      <img width="34" height="32" src="assets/logo.png"/>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <!--PULL TO REFRESH-->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Carregar novos posts"
+      refreshingSpinner="circles"
+      refreshingText="Carregando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!--FIRST IMAGE-->
+  <img *ngIf="firstFeed" [src]="firstFeed.imageUrl" (click)="itemSelected(firstFeed.content)">
+
+  <!--FILTERS-->
+  <ion-scroll [scrollX]="true" [zoom]="false" class="wide-as-needed">
+    <button class="category-card">
+      <div class="icon"><img src="assets/android-icon.png" (click)="doFilter('')"></div>
+      <div class="label">Todos</div>
+    </button>
+    <button class="category-card" (click)="doFilter('android')">
+      <div class="icon"><img src="assets/android-icon.png"></div>
+      <div class="label">Android</div>
+    </button>
+    <button class="category-card">
+      <div class="icon"><img class="ubuntu" src="assets/ubuntu-icon.png" (click)="doFilter('Ubuntu')"></div>
+      <div class="label">Ubuntu</div>
+    </button>
+  </ion-scroll>
+
+  <!--HEADING-->
+  <p class="feed-header">Feed de Notícias</p>
+
+  <!--LOADING BOX-->
+  <div class="spinner-box" *ngIf="!feeds">
+    <ion-spinner></ion-spinner>
+    <p class="info">Carregando...</p>
+  </div>
+
+  <!--FEED-->
+  <ion-card *ngFor="let feed of feeds">
+    <ion-card-content>
+      <p class="card-date">{{feed.published | date:'fullDate' | capitalize}}</p>
+      <h2 class="card-title" (click)="itemSelected(feed.content)" tappable="true">{{feed.title}}</h2>
+      <img class="card-image" [src]="feed.imageUrl" (click)="itemSelected(feed.content)" tappable="true"/>
+      <read-more class="card-description" [text]="feed.content" [maxLength]="250" (click)="itemSelected(feed.content)" tappable="true"></read-more>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingText="Carregando mais posts...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
