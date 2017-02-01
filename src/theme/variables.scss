@@ -17,6 +17,7 @@ $list-margin-top: $navbar-height;
 $toolbar-button-font-size: 1.5rem;
 $card-margin-left: 0;
 $card-margin-right: 0;
+$tabs-tab-icon-size: 24px;
 
 
 // Named Color Variables
@@ -47,6 +48,7 @@ $toolbar-ios-button-font-size: $toolbar-button-font-size;
 $background-ios-color: #F5F5F5;
 $card-ios-margin-left: $card-margin-left;
 $card-ios-margin-right: $card-margin-right;
+$tabs-ios-tab-icon-size: $tabs-tab-icon-size;
 
 
 // App Material Design Variables
@@ -59,6 +61,7 @@ $toolbar-md-button-font-size: $toolbar-button-font-size;
 $background-md-color: #F5F5F5;
 $card-md-margin-left: $card-margin-left;
 $card-md-margin-right: $card-margin-right;
+$tabs-imd-tab-icon-size: $tabs-tab-icon-size;
 
 
 // App Windows Variables
