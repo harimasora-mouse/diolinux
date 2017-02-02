@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {BloggerService} from "../../providers/blogger-service";
 import {ItemDetailsPage} from "../item-details/item-details";
-import {ReadMoreComponent} from "../pages/home/read-more";
-import {CapitalizePipe} from "../../providers/capitalize.pipe";
 
 @Component({
   selector: 'page-home',

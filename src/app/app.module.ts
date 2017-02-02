@@ -4,11 +4,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {BloggerService} from "../providers/blogger-service";
 import {ItemDetailsPage} from "../pages/item-details/item-details";
-import {ReadMoreComponent} from "../pages/home/read-more";
+import {ReadMoreComponent} from "../components/read-more/read-more";
 import {CapitalizePipe} from "../providers/capitalize.pipe";
 import {TabsPage} from "../pages/tabs/tabs";
 import {SettingsPage} from "../pages/settings/settings";
 import {DiocastPage} from "../pages/diocast/diocast";
+import {PageContentComponent} from "../components/page-content/page-content";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {DiocastPage} from "../pages/diocast/diocast";
     SettingsPage,
     ItemDetailsPage,
     ReadMoreComponent,
+    PageContentComponent,
     CapitalizePipe
 
   ],
@@ -32,8 +34,7 @@ import {DiocastPage} from "../pages/diocast/diocast";
     HomePage,
     DiocastPage,
     SettingsPage,
-    ItemDetailsPage,
-    ReadMoreComponent
+    ItemDetailsPage
   ],
   providers: [{ provide: LOCALE_ID, useValue: "pt-BR" },{provide: ErrorHandler, useClass: IonicErrorHandler}, BloggerService]
 })

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -37,6 +37,7 @@ export class BloggerService {
                     } else {
                         e.imageUrl = 'http://www.redditstatic.com/icon.png';
                     }
+                    e.content = this.removeScriptTags(e.content);
                 });
             } else {
                 this.data.items = [];
@@ -79,13 +80,24 @@ export class BloggerService {
     return new Promise(resolve => {
       let params = new URLSearchParams();
       params.set('labels', searchText);
-      // params.set('q', searchText);
-      // params.set('fetchBodies', 'true');
-      // params.set('orderBy', 'published');
-      // params.set('fields', 'items/images');
-      // resolve(this.fetchPosts(url, params, '/search'));
       resolve(this.fetchPosts(url, params));
     })
+  }
+
+  private removeScriptTags (rawContent): string {
+    let googleAdsSelector = /<script>\n\(adsbygoogle = window\.adsbygoogle \|\| \[\]\)\.push\(\{\}\);\n<\/script>/gi;
+    rawContent = rawContent.replace(googleAdsSelector, '');
+
+    let insSelector = /<ins.*>.*(<\/?ins>?)?/gi;
+    rawContent = rawContent.replace(insSelector, '');
+
+    // let aSelector = /<a.*>.*(<\/?a>?)?/gi;
+    // rawContent = rawContent.replace(aSelector, '');
+
+    let replacer = /<script.*>.*(<\/?script>?)?/gi;
+    let stripped = rawContent.replace(replacer, '');
+
+    return stripped;
   }
 
 }
